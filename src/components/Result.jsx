@@ -1,5 +1,4 @@
-import { calculateInvestmentResults } from "../util/investment";
-import { formatter } from "../util/investment";
+import { calculateInvestmentResults, formatter } from "../util/investment";
 function getTableData(data) {
   let result = [];
 
@@ -25,7 +24,7 @@ function getTableData(data) {
 export default function Result({ parameters }) {
   const data = calculateInvestmentResults(parameters);
 
-  const tableData = data.length > 0 && getTableData(data);
+  const tableData = getTableData(data);
 
   return (
     <table id="result">
@@ -39,18 +38,17 @@ export default function Result({ parameters }) {
         </tr>
       </thead>
       <tbody>
-        {tableData &&
-          tableData.map((data, index) => {
-            return (
-              <tr key={index} className="center">
-                <td>{data.year}</td>
-                <td>{data.investmentValue}</td>
-                <td>{data.interestThisYear}</td>
-                <td>{data.totalInterest}</td>
-                <td>{data.investedCapital}</td>
-              </tr>
-            );
-          })}
+        {tableData.map((data, index) => {
+          return (
+            <tr key={index} className="center">
+              <td>{data.year}</td>
+              <td>{data.investmentValue}</td>
+              <td>{data.interestThisYear}</td>
+              <td>{data.totalInterest}</td>
+              <td>{data.investedCapital}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

@@ -16,6 +16,9 @@ function App() {
       return updateValues;
     });
   }
+
+  const isValidInput = parameters.duration > 0;
+
   return (
     <>
       <Header />
@@ -45,7 +48,11 @@ function App() {
           onParameterChange={handleParameterChange}
         />
       </section>
-      <Result parameters={parameters} />
+      {isValidInput ? (
+        <Result parameters={parameters} />
+      ) : (
+        <p className="center">Please enter a valid duration.</p>
+      )}
     </>
   );
 }
